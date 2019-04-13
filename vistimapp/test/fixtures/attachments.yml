@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  user: 
+  comment: MyText
+  bin_content: 
+
+two:
+  type: 
+  user: 
+  comment: MyText
+  bin_content: 
