@@ -1,3 +1,36 @@
 // Place all the styles related to the Homepage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.hero {
+  height: 250px;
+  min-height: 250px;
+  width: 100%;
+  background-color: blue;
+  
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  margin-bottom: 3rem;
+}
+
+.hero > h1 {
+  margin-top: 0 !important;
+  color: white;
+  position: relative;
+  bottom: 2px;
+  top: 25px;
+}
+
+.hero > img {
+  object-position: 50% 50%;
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  padding: 0;
+  margin: 0;
+
+}

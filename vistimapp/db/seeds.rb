@@ -18,3 +18,4 @@ Complaint.create!([
   {user_id: 1, category_id: 1, entity_id: 1, title: "My spaghetti not likey", content: "please fixx thx"}
 ])
 
+Comment.create!({"user_id": 1, "content": "I agree.", "complaint_id": 1 })

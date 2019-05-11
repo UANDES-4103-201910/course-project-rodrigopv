@@ -1,29 +1,35 @@
 <p id="notice"><%= notice %></p>
+<div class="row my-3 p-3 bg-white rounded box-shadow">
+   <div class="col-sm-8 justify-content-start">
+   <h1>Complaint: <span><%= @complaint.title %></span></h1><small>created on: <%= @complaint.created_at %></small>
+     <p class="bio" style="font-size: 1rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+     </p>
+   </div>
+   <div class="col-sm-4 justify-content-end">
+     <img data-src="holder.js/250x250" style="float:right;" />
+   </div>
+</div>
+<div class="row">
+ <div class="col-md-12">
+   <div class="my-3 p-3 bg-white rounded box-shadow">
+     <h6 class="border-bottom border-gray pb-2 mb-0">Comments</h6>
 
-<p>
-  <strong>Author:</strong>
-  <%= @complaint.user %>
-</p>
 
-<p>
-  <strong>Category:</strong>
-  <%= @complaint.category %>
-</p>
+    <% @complaint.comments.each do |comment| %>
+   <div class="media text-muted pt-3">
+      <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" class="mr-2 rounded" />
+      <p class="media-body pb-3 mb-0 small lh-125">
+        <strong d-block text-gray-dark><a href="#"><%= comment.content %></a><br></strong>
+        Author: <%= comment.user.name %>
+      </p>
+   </div>
+    <% end %>
 
-<p>
-  <strong>Entity:</strong>
-  <%= @complaint.entity %>
-</p>
+   </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @complaint.title %>
-</p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @complaint.content %>
-</p>
+ </div>
+</div>
 
-<%= link_to 'Edit', edit_complaint_path(@complaint) %> |
+<%= link_to 'Edit', edit_user_path(@complaint) %> |
 <%= link_to 'Back', complaints_path %>

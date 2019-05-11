@@ -1,24 +1,58 @@
 <p id="notice"><%= notice %></p>
+<div class="row my-3 p-3 bg-white rounded box-shadow">
+   <div class="col-sm-8 justify-content-start">
+   <h1>Profile: <span><%= @user.name %></span></h1><small>@<%= @user.username %></small>
+     <p class="bio" style="font-size: 1rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+     </p>
+   </div>
+   <div class="col-sm-4 justify-content-end">
+     <img data-src="holder.js/250x250" style="float:right;" />
+   </div>
+</div>
+<div class="row">
+ <div class="col-md-6">
+   <div class="my-3 p-3 bg-white rounded box-shadow">
+     <h6 class="border-bottom border-gray pb-2 mb-0">Recent activity</h6>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+   <div class="media text-muted pt-3">
+      <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" class="mr-2 rounded" />
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+   </div>
+   <div class="media text-muted pt-3">
+      <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" class="mr-2 rounded" />
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+   </div>
+   <div class="media text-muted pt-3">
+      <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" class="mr-2 rounded" />
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+   </div>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+   </div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
 
-<p>
-  <strong>Role:</strong>
-  <%= @user.role %>
-</p>
+ </div>
+ <div class="col-md-6">
+   <div class="my-3 p-3 bg-white rounded box-shadow">
+     <h6 class="border-bottom border-gray pb-2 mb-0">Recent complaints</h6>
+
+
+   <div class="media text-muted pt-3">
+      <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" class="mr-2 rounded" />
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi</p>
+   </div>
+   <div class="media text-muted pt-3">
+      <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" class="mr-2 rounded" />
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi</p>
+   </div>
+   <div class="media text-muted pt-3">
+      <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" class="mr-2 rounded" />
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi</p>
+   </div>
+
+
+   </div>
+ </div>
+</div>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
