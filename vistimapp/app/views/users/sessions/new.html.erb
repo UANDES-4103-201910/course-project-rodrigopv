@@ -1,0 +1,26 @@
+
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin"} ) do |f| %>
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <%= f.label :email, :class => "sr-only"  %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", :id => "inputEmail", :class => "form-control", :placeholder => "E-mail"  %>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <%= f.label :password, :class => "sr-only" %>
+      <%= f.password_field :password, autocomplete: "current-password", :id => "inputPassword", :class => "form-control", :placeholder => "Password" %>
+
+  <% if devise_mapping.rememberable? %>
+      <div class="checkbox mb-3">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+      </div>
+  <% end %>
+
+
+    <%= f.button "Log in", type: :submit, class: "btn btn-lg btn-primary btn-block" %>
+
+
+      <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+<%= render "users/shared/links" %>
+
+    </form>
+<% end %>
