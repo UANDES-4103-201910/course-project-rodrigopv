@@ -1,5 +1,10 @@
 # Assignment #3
 
+## Live website: https://vistimapp.skins.cl
+## Admin test: lrpena@miuandes.cl pass: 123456
+### you can register your own user there also
+
+
 ## Implemented features
 * Mainly everything but not implemented
 * Google Auth
