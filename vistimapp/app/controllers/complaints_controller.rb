@@ -1,6 +1,8 @@
 class ComplaintsController < ApplicationController
   before_action :set_complaint, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create]
   skip_before_action :verify_authenticity_token, :only => [:create, :update, :destroy]
+
 
   # GET /complaints
   # GET /complaints.json
@@ -11,6 +13,7 @@ class ComplaintsController < ApplicationController
   # GET /complaints/1
   # GET /complaints/1.json
   def show
+    @comment = Comment.new
   end
 
   # GET /complaints/new
@@ -25,7 +28,11 @@ class ComplaintsController < ApplicationController
   # POST /complaints
   # POST /complaints.json
   def create
-    @complaint = Complaint.new(complaint_params)
+    # ({user_id: 1, category_id: 1, entity_id: 1, title: "I need more time", content: "please?"}
+
+    newparams = complaint_params
+    newparams[:user_id] = current_user.id
+    @complaint = Complaint.new(newparams)
 
     respond_to do |format|
       if @complaint.save
@@ -70,6 +77,9 @@ class ComplaintsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def complaint_params
-      params.require(:complaint).permit(:user_id, :category_id, :entity_id, :title, :content)
+      params[:complaint][:entity_id] = 1
+      params[:complaint][:category_id] = 1
+
+      params.require(:complaint).permit(:category_id, :entity_id, :title, :content, :main_image)
     end
 end

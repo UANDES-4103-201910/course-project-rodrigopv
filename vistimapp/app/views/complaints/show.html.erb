@@ -1,14 +1,85 @@
 <p id="notice"><%= notice %></p>
+
+<div class="row my-3 p-3 bg-white rounded box-shadow">
+   <div class="col-md-6">
+     <small style="color: green;"><%= @complaint.likes.count %> users liked this complaint</small>
+   </div>
+
+   <div class="col-md-6 text-md-right">
+    <% has_like = @complaint.likes.find { |like| like.user_id == current_user.id } %>
+    <% if has_like %>
+       <%= button_to 'Dislike this complaint', complaint_like_path(@complaint, has_like), method: :delete, class: "dislike rounded" %>
+    <% else %>
+       <%= button_to 'Like this complaint', complaint_likes_path(@complaint), method: :post, class: "like rounded" %>
+    <% end %>
+    <button class="dislike rounded">Mark as innapropiate</button>
+    <button class="like rounded">Follow this post</button>
+   </div>
+</div>
+
 <div class="row my-3 p-3 bg-white rounded box-shadow">
    <div class="col-sm-8 justify-content-start">
    <h1>Complaint: <span><%= @complaint.title %></span></h1><small>created on: <%= @complaint.created_at %></small>
-     <p class="bio" style="font-size: 1rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+     <p class="bio" style="font-size: 1rem;">
+     <%= @complaint.content %>  
      </p>
    </div>
    <div class="col-sm-4 justify-content-end">
-     <img data-src="holder.js/250x250" style="float:right;" />
+     <% if @complaint.main_image.attached? %>
+        <%=  image_tag url_for(@complaint.main_image.variant(resize: "250x250")) %>
+     <% else %>
+        <img data-src="holder.js/250x250" style="float:right;" />
+     <% end %>
    </div>
 </div>
+
+<div class="row">
+ <div class="col-md-12 bg-white rounded box-shadow">
+   <div class="my-3 p-3 bg-white rounded box-shadow">
+     <h6 class="border-bottom border-gray pb-2 mb-0">Attached Media</h6>
+   </div>
+ <div class="row">
+
+
+ <div class="col-md-2">
+   <div class="card mb-2 box-shadow">
+     <img class="card-img-top" data-src="holder.js/100px100?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" style="height: 100px; width: 100% display:block;" />
+   </div>
+ </div>
+ <div class="col-md-2">
+   <div class="card mb-2 box-shadow">
+     <img class="card-img-top" data-src="holder.js/100px100?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" style="height: 100px; width: 100% display:block;" />
+   </div>
+ </div>
+ <div class="col-md-2">
+   <div class="card mb-2 box-shadow">
+     <img class="card-img-top" data-src="holder.js/100px100?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" style="height: 100px; width: 100% display:block;" />
+   </div>
+ </div>
+ <div class="col-md-2">
+   <div class="card mb-2 box-shadow">
+     <img class="card-img-top" data-src="holder.js/100px100?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" style="height: 100px; width: 100% display:block;" />
+   </div>
+ </div>
+ <div class="col-md-2">
+   <div class="card mb-2 box-shadow">
+     <img class="card-img-top" data-src="holder.js/100px100?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" style="height: 100px; width: 100% display:block;" />
+   </div>
+ </div>
+ <div class="col-md-2">
+   <div class="card mb-2 box-shadow">
+     <img class="card-img-top" data-src="holder.js/100px100?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" style="height: 100px; width: 100% display:block;" />
+   </div>
+ </div>
+
+
+ </div>
+
+
+
+ </div>
+</div>
+
 <div class="row">
  <div class="col-md-12">
    <div class="my-3 p-3 bg-white rounded box-shadow">
@@ -16,16 +87,39 @@
 
 
     <% @complaint.comments.each do |comment| %>
-   <div class="media text-muted pt-3">
-      <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" class="mr-2 rounded" />
-      <p class="media-body pb-3 mb-0 small lh-125">
-        <strong d-block text-gray-dark><a href="#"><%= comment.content %></a><br></strong>
-        Author: <%= comment.user.name %>
-      </p>
-   </div>
-    <% end %>
+     <div class="media text-muted pt-3">
+      <% if comment.user.avatar.attached?  %>
+         <a href="<%= url_for(comment.user) %>">
+         <%=  image_tag url_for(comment.user.avatar.variant(combine_options: { thumbnail: "32x32^", gravity: 'Center', crop: "32x32+0+0" })), class: "mr-2 rounded" %>
+         <%#=  image_tag url_for(comment.user.avatar.variant(resize: "32x32")) %>
+         </a>
 
+      <% else %>
+         <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" class="mr-2 rounded" />
+      <% end %>
+      <p class="media-body pb-3 mb-0 small lh-125">
+        <strong d-block text-gray-dark><%= comment.content %><br></strong>
+        <a href="javascript:void(0);" class="comment_username"><small>@<%= comment.user.username %></small></a>
+      </p>
+     </div>
+    <% end %>
    </div>
+
+<div class="row">
+ <div class="col-md-12">
+   <div class="my-3 p-3 bg-white rounded box-shadow">
+     <h6 class="border-bottom border-gray pb-2 mb-0">Write a comment</h6>
+
+    <%= form_for([@complaint, @comment]) do |f| %>
+     <div class="row">
+      <div class="col-md-10">
+         <%=f.text_field :content , style: "width: 100%;", class: "form-control" %>
+      </div>
+      <div class="col-md-2">
+         <%=f.submit "Send comment", class: "form-control" %>
+      </div>
+     </div>
+    <% end %>
 
 
  </div>

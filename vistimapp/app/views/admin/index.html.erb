@@ -1,0 +1,33 @@
+<div class="container">
+
+
+<h1>Admin Panel </h1>
+
+<div class="row mt-2">
+ <div class="col-md-6">
+   <div class="card pl-3">
+     <h3>Latest complaints</h1>
+     <ul>
+        <% @complaints.each do |complaint| %>
+         <li>
+           <%= link_to complaint.title, @complaint %> [<%= link_to 'DELETE', complaint, method: :delete %>]
+         </li>
+        <% end %>
+     </ul>
+   </div>
+ </div>
+ <div class="col-md-6">
+   <div class="card pl-3">
+     <h3>Latest comments</h1>
+     <ul>
+        <% @comments.each do |comment| %>
+         <li>
+          <%= comment.content %> (author: <%= comment.user.username %>)
+          [<%= link_to 'DELETE', comment, method: :delete  %>]
+         </li>
+        <% end %>
+     </ul>
+   </div>
+ </div>
+</div>
+</div>

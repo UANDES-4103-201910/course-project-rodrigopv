@@ -1,7 +1,17 @@
 User.create!([
-  {name: "Rodrigo", username: "lrpena", password: "lala", email: "lrpena@miuandes.cl", role: "superadmin"},
-  {name: "Claudio", username: "calvarez1", password: "lala", email: "calvarez1@miuandes.cl", role: "user"}
+  {name: "Rodrigo", username: "lrpena", password: "123456", password_confirmation: "123456", email: "lrpena@miuandes.cl", role: "superadmin"},
+  {name: "Claudio", username: "calvarez1", password: "123456", password_confirmation: "123456" email: "calvarez1@miuandes.cl", role: "admin"}
+  {name: "Claudigo", username: "claudigo", password: "123456", password_confirmation: "123456",  email: "claudigo@miuandes.cl", role: ""}
 ])
+
+@rodrigo = User.find_by(username: "lrpena")
+@rodrigo.add_role(:superadmin)
+
+@claudio = User.find_by(username: "calvarez1")
+@claudio.add_role(:admin)
+
+@claudigo = User.find_by(username: "claudigo")
+@claudigo.add_role(:registered)
 
 Category.create!([
   {name: "Comida"}

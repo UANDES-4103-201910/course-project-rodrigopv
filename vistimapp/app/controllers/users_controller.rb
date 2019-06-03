@@ -5,7 +5,13 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = search(params[:search])
+    if !@users.present?
+      @users = []
+    end
+    puts "AAAA"
+    puts @users 
+    puts "BBBB"
   end
 
   # GET /users/1
@@ -42,6 +48,9 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
+      if params[:avatar].present?
+         res = @user.avatar.attach(params[:avatar])
+      end
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
@@ -62,14 +71,35 @@ class UsersController < ApplicationController
     end
   end
 
+
+
+  def search(search)
+     if search
+        @users = User.where('username LIKE ? or name LIKE ? or email LIKE ?', "%#{search}%","%#{search}%","%#{search}%")
+     else
+        @users = User.all
+     end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      if params[:pk].present?
+        @user = User.find(params[:pk])
+        if params[:value].present?
+           params[:user] = { bio: params[:value] }
+        end
+        if params[:avatar].present? and !params[:user].present?
+           params[:user] = { avatar: params[:avatar] }
+        end
+      else
+        @user = User.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :username, :password, :email, :role)
+      params.require(:user).permit(:name, :username, :password, :email, :role, :bio, :search)
     end
+    
 end

@@ -61,4 +61,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: '138.122.226.32', port: 3000 }
 
+  config.force_ssl = true
+
+  OmniAuth.config.full_host = "https://vistimapp.skins.cl"
+
 end

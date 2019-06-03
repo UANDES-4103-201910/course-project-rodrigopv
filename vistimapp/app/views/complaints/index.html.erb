@@ -35,7 +35,11 @@
    <h2>Not enough?</h2>
  </div>
  <div class="xs-12 col-md-4 my-auto my-3 p-3 text-right">
+<% if user_signed_in? %> 
    <%= link_to 'Write a complaint',  new_complaint_path %>
+<% else %>
+   <%= link_to 'Sign in to write a complaint',  new_user_session_path %>
+<% end %>
  </div>
 </div>
 <!-- 

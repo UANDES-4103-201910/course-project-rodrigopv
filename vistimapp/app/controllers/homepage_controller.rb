@@ -4,6 +4,8 @@ class HomepageController < ApplicationController
     @complaints = Complaint.all
     render layout: "homepage"
   end
+
+  
  
   def login
   end

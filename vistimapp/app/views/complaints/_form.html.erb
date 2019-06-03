@@ -12,28 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= form.text_field :title, placeholder: "Complaint Title...", class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :category_id %>
-    <%= form.text_field :category_id %>
+    <%= form.text_area :content, placeholder: "Write your complaint here",  class: "form-control", rows: 5 %>
   </div>
 
   <div class="field">
-    <%= form.label :entity_id %>
-    <%= form.text_field :entity_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%= form.label :main_image %><br />
+    <%= form.file_field :main_image %>
   </div>
 
   <div class="actions">

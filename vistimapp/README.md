@@ -1,12 +1,27 @@
-# Assignment #2
+# Assignment #3
 
 ## Implemented features
-* RESTful actions, API TEST: https://www.getpostman.com/collections/4b698575abd8f2f3279c
-* Responsive design using bootstrap 4
-* Views retrieve data from database
-* Example data (seeds.rb)
-
-## Pending features
+* Mainly everything but not implemented
+* Google Auth
 * Admin panel
-* ACLs and access restriction
-* Actual login system
+* Login with email address
+* Log out
+* Register user
+* Post/complaints
+* Complaint comments
+* Edit user profile
+* - Edit user bio, avatar
+* Like/dislike button
+* User Search
+* File upload
+* Responsive design
+
+## Not implemented features
+* Edit comments
+* Search by location
+* Flag complaint
+* Password recovery (didn't test if devise does this magically)
+* Admin change password 
+* Admin Panel delete user
+* More than 1 image per complaint
+* Post location on map

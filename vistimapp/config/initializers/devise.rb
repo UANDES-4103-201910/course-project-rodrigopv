@@ -261,6 +261,13 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
+  client_id = '83315292800-73vti2ce7n3nis3k51kqrvpo3d0kd62l.apps.googleusercontent.com'
+  client_secret = '194WcCWDev92d2LQec_vC-bN'
+  # Configure Google omniauth with proper scope
+  config.omniauth :google_oauth2, client_id, client_secret, {
+    scope: "contacts.readonly,userinfo.email"
+  }
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
