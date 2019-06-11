@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="my-3 p-3 bg-white rounded box-shadow">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="h2">Users</h1>
+    </div>
+
+    <%= form_tag(admin_users_path, method: :get) do %>
+           <%= text_field_tag(:search, params[:search], class: "form-control", placeholder: "Search by name, username or email") %>
+        <%= submit_tag("Search", class: "btn btn-primary") %>
+    <% end %>
+
+
+    <div class="vistim">
+     <% @users.each do |user| %>
+      <div class="media text-muted pt-3 border-bottom border-gray">
+         <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" class="mr-2 rounded" alt="32x32" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2232%22%20height%3D%2232%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16b39ead8b1%20text%20%7B%20fill%3A%23007bff%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A2pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16b39ead8b1%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23007bff%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2212.296875%22%20y%3D%2216.9%22%3E32x32%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="width: 32px; height: 32px;">
+          <p class="media-body pb-3 mb-0 lh-125 align-middle">
+            <strong class="d-block text-gray-dark"><%= link_to user.name + ", " + user.username, user %>.</strong>
+            last access: <%= user.last_access || 'never' %>
+            <br>created on: <%= user.created_at %>
+
+          </p>
+          <% if user.blacklist %>
+            <%= link_to 'Remove from Blacklist', user_restore_path(user), class: "btn btn-primary" %>
+          <% else %>
+            <%= link_to 'Blacklist', user_blacklist_path(user), class: "btn btn-danger" %>
+          <% end %>
+          <button type="button" class="btn btn-primary" style="margin-left: 3px;" 
+                  data-toggle="modal" 
+                  data-target="#changePasswordModal"
+                  data-userid="<%=user.id%>">Change Password</button>
+      </div>
+     <% end %>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="changePasswordLabel">Change Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        
+       <%= form_tag user_changepassword_path(1), id: "changePasswordForm", class:"blah" do %>
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="password" class="col-form-label">New Password:</label>
+            <input name="password" type="text" class="form-control" id="password">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Change Password</button>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

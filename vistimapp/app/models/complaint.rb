@@ -8,4 +8,9 @@ class Complaint < ApplicationRecord
    has_many :likes, dependent: :destroy
    has_many_attached :media
    has_one_attached :main_image
+
+   # Socialization Gem
+   acts_as_likeable
+   acts_as_followable
+
 end

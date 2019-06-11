@@ -24,6 +24,11 @@
     <%= form.file_field :main_image %>
   </div>
 
+  <input id="pac-input" class="form-control" type="text" placeholder="Enter location of complaint">
+
+  <%= form.hidden_field :lat %>
+  <%= form.hidden_field :lng %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

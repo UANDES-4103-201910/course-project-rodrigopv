@@ -6,14 +6,33 @@ Rails.application.routes.draw do
 
   # devise_for :users
 
-  resources :users
+  resources :users do
+       get  :restore
+       get  :blacklist
+       post :changepassword
+  end
   resources :complaints do
     resources :comments
-    resources :likes
+    member do
+       post :like
+       post :dislike
+       post :follow
+       post :unfollow
+       get  :republish
+       get  :unpublish
+       get  :addmedia, to: 'complaints#uploadmedia'
+       post :addmedia, to: 'complaints#addmedia'
+    end
   end
   resources :comments
   
   get '/admin', to: 'admin#index'
+  get '/admin/dumpster'
+  get '/admin/blacklist'
+  get '/admin/users'
+
+  get '/aup', to: 'homepage#aup'
+  get '/tos', to: 'homepage#tos'
 
   root to: 'homepage#index'
   get '/', to: 'homepage#index'

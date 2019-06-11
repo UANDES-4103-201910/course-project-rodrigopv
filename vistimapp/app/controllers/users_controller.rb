@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :restore, :blacklist, :changepassword]
+  before_action :authenticate_user!, only: [:new, :create, :update, :delete, :destroy, :changepassword]
+
   skip_before_action :verify_authenticity_token, :only => [:create, :update, :destroy]
 
   # GET /users
@@ -9,9 +11,6 @@ class UsersController < ApplicationController
     if !@users.present?
       @users = []
     end
-    puts "AAAA"
-    puts @users 
-    puts "BBBB"
   end
 
   # GET /users/1
@@ -71,6 +70,30 @@ class UsersController < ApplicationController
     end
   end
 
+  def restore
+    flash[:notice] = "The user has been restored"
+    @user.blacklist = false
+    @user.save
+    redirect_to admin_blacklist_path
+  end
+
+  def blacklist
+    flash[:notice] = "The user has been blacklisted"
+    @user.blacklist = true
+    @user.save
+    redirect_to admin_blacklist_path
+  end
+
+  def changepassword 
+    puts "Changing password to"
+    puts changepassword_params[:password]
+    puts @user.id
+    @user.password = params[:password]
+    @user.password_confirmation = params[:password]
+    @user.save
+    flash[:notice] = "User password has been changed."
+    redirect_to admin_users_path
+  end
 
 
   def search(search)
@@ -93,13 +116,21 @@ class UsersController < ApplicationController
            params[:user] = { avatar: params[:avatar] }
         end
       else
-        @user = User.find(params[:id])
+        if params[:id].present?
+          @user = User.find(params[:id])
+        else
+          @user = User.find(params[:user_id])
+        end
       end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :username, :password, :email, :role, :bio, :search)
+    end
+
+    def changepassword_params
+      params.permit(:password, :utf8, :authenticity_token, :user_id)
     end
     
 end

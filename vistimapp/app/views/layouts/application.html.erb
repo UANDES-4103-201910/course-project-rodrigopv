@@ -18,10 +18,14 @@
 
   <body class="bg-light" 
 
-    <% if controller_name = 'users' and user_signed_in? %>
+    <% if controller_name == 'users' and user_signed_in? %>
       data-logged-user-id="<%= current_user.id %>"
       data-profile-id="<%= params[:id].to_i %>"
+    <% else %>
+     data-logged-user-id="-1"
+     data-profile-id="<%= params[:id].to_i %>"
     <% end %>
+    
   >
 
   <!-- Navigation Bar -->
@@ -45,6 +49,8 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS9XDhfDYRBOnSrCW7t2s7z12WUdla6V8&libraries=places"></script>
+
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag params[:controller] rescue nil %>
 

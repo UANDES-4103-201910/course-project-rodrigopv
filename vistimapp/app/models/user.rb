@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   rolify
   after_create :assign_default_role, :add_default_bio
+  before_save :default_values
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -10,8 +11,11 @@ class User < ApplicationRecord
   has_many :complaints
   has_many :comments
   has_many :reports
-  has_many :likes, dependent: :destroy
   has_one_attached :avatar
+
+  acts_as_follower
+  acts_as_liker
+  acts_as_mentionable
 
   def self.from_omniauth(auth)
     # Either create a User record or update it based on the provider (Google) and the UID   
@@ -62,5 +66,9 @@ class User < ApplicationRecord
   def after_database_authentication
     self.touch(:last_access)
   end  
+
+  def default_values
+    self.blacklist = false if self.blacklist.nil?
+  end
 
 end

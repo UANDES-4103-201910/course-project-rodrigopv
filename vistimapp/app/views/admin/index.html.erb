@@ -3,6 +3,10 @@
 
 <h1>Admin Panel </h1>
 
+<%= link_to 'Dumpster' , 'admin/dumpster', class:"btn btn-primary btn-large" %>
+<%= link_to 'Blacklist', 'admin/blacklist', class:"btn btn-primary btn-large" %>
+<%= link_to 'Users'    , 'admin/users', class:"btn btn-primary btn-large" %>
+
 <div class="row mt-2">
  <div class="col-md-6">
    <div class="card pl-3">
@@ -11,6 +15,7 @@
         <% @complaints.each do |complaint| %>
          <li>
            <%= link_to complaint.title, @complaint %> [<%= link_to 'DELETE', complaint, method: :delete %>]
+           [<%= link_to 'DUMPSTER', unpublish_complaint_path(complaint), method: :get %>]
          </li>
         <% end %>
      </ul>
@@ -24,6 +29,22 @@
          <li>
           <%= comment.content %> (author: <%= comment.user.username %>)
           [<%= link_to 'DELETE', comment, method: :delete  %>]
+         </li>
+        <% end %>
+     </ul>
+   </div>
+ </div>
+</div>
+<div class="row mt-2">
+ <div class="col-md-6">
+   <div class="card pl-3">
+     <h3>Dumpster</h1>
+     <ul>
+        <% @dumpster.each do |complaint| %>
+         <li>
+          <%= complaint.title %> (author: <%= complaint.user.username %>)
+          [<%= link_to 'DELETE', complaint, method: :delete  %>]
+          [<%= link_to 'REPUBLISH', republish_complaint_path(complaint), method: :get  %>]
          </li>
         <% end %>
      </ul>

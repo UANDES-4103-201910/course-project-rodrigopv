@@ -24,6 +24,15 @@
   <!-- Page Content -->
          <%= yield %>
 
+
+   <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+        <p><span><%= link_to 'Acceptable Use Policy', aup_path %> </span> - <span><%= link_to 'Terms of Service', tos_path %> </span></p>
+      </div>
+    </footer>
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

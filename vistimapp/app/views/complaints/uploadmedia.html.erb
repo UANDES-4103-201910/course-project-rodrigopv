@@ -1,0 +1,39 @@
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="h2">Add Media</h1>
+
+    </div>
+    <div>
+
+
+<%= form_tag(addmedia_complaint_path(@complaint), multipart: true) do |form| %>
+  <% if @complaint.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(complaint.errors.count, "error") %> prohibited this complaint from being saved:</h2>
+
+      <ul>
+      <% @complaint.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= label_tag 'Select Image' %><br />
+    <%= file_field_tag :image %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>
+
+
+
+
+
+    </div>
+</div>
+
